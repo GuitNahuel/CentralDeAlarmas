@@ -17,4 +17,11 @@ public class Sensor {
 	public Boolean getEstadoSensor() {
 		return estadoSensor;
 	}
+
+
+
+	public void setEstadoSensor(Boolean estadoSensor) {
+		this.estadoSensor = estadoSensor;
+	}
+	
 }

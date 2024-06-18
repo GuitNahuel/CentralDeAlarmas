@@ -9,6 +9,7 @@ public class Central {
 	private List<Usuario> usuarios;
 	private List<Sensor> sensores;
 	private Integer idUsuarioConfigurador;
+	private Configurador usuarioConfigurador;
 
 	public Central(Integer idConfigurador) {
 		this.idUsuarioConfigurador = idConfigurador;
@@ -107,9 +108,35 @@ public class Central {
 		return sensores.add(sensor);
 	}
 
-	public Boolean activarSensorDeAlarma(Integer idSensor, Integer idAlarma, String codigoActivacionAlarma) {
-		
-		return	false;
+	public Boolean activarSensorDeAlarma(Integer idSensor, Integer idAlarma, String codigoActivacionAlarma)
+			throws AlarmaException, SensorNoEncontradorException {
+		Alarma alarma = busquedaDeAlarma(idAlarma);
+		if (alarma.getCodigoActivacionDesactivacion().equals(codigoActivacionAlarma)) {
+			Sensor sensor = alarma.buscarSensorDentroDeLaAlarma(idSensor);
+			if (sensor != null) {
+				sensor.setEstadoSensor(true);
+				return sensor.getEstadoSensor();
+			}
+		}
+
+		return false;
+	}
+
+	public Boolean activarDesactivarAlarma(Integer idAlarma, String codigoActivacionAlarma, Configurador usuario)
+			throws AlarmaException {
+		Alarma alarma = busquedaDeAlarma(idAlarma);
+		if (alarma.sensoresActivados() && alarma.getCodigoActivacionDesactivacion().equals(codigoActivacionAlarma)) {
+			alarma.setEstadoAlarma(EstadoDeAlarma.ACTIVADA);
+			return true;
+
+		} else
+			alarma.setEstadoAlarma(EstadoDeAlarma.EN_CONFIGURACION);
+			return false;
+
+	}
+
+	public Configurador getUsuarioConfigurador() {
+		return usuarioConfigurador;
 	}
 
 }
