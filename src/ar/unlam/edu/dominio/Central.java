@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-import ar.unlam.central.testing.CodigoAlarmaIncorrectoException;
-
 public class Central {
 	private TreeSet<Alarma> alarmas;
 	private List<Usuario> usuarios;
+	private List<Sensor> sensores;
+	private Integer idUsuarioConfigurador;
 
-	public Central() {
+	public Central(Integer idConfigurador) {
+		this.idUsuarioConfigurador = idConfigurador;
 		alarmas = new TreeSet<Alarma>();
 		usuarios = new ArrayList<Usuario>();
+		sensores = new ArrayList<Sensor>();
 	}
 
 	public Boolean agregarAlarma(Alarma alarma) {
@@ -46,7 +48,7 @@ public class Central {
 			}
 		}
 
-		return null;
+		return false;
 
 	}
 
@@ -72,6 +74,42 @@ public class Central {
 		}
 		throw new UsuarioException("No se encontro al usuario");
 
+	}
+
+	public List<Sensor> getSensores() {
+		return sensores;
+	}
+
+	public Boolean agregarSensorAAlarma(Integer idAlarma, String codigoConfigAlarma, Sensor sensor,
+			Integer usuarioConfigurador) throws AlarmaException, SensorDuplicadoException {
+		Alarma alarma = busquedaDeAlarma(idAlarma);
+
+		if (idUsuarioConfigurador.equals(usuarioConfigurador)) {
+			if (alarma.getCodigoConfiguracion().equals(codigoConfigAlarma)) {
+
+				if (alarma.sensorInexistente(sensor)) {
+					return alarma.agregarSensorALaListaDeSensores(sensor);
+				} else
+					throw new SensorDuplicadoException("Ya existe ese sensor");
+			}
+
+		}
+
+		return false;
+
+	}
+
+	public Integer getIdUsuarioConfigurador() {
+		return idUsuarioConfigurador;
+	}
+
+	public Boolean agregarSensor(Sensor sensor) {
+		return sensores.add(sensor);
+	}
+
+	public Boolean activarSensorDeAlarma(Integer idSensor, Integer idAlarma, String codigoActivacionAlarma) {
+		
+		return	false;
 	}
 
 }

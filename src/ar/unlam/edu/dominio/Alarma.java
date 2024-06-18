@@ -9,6 +9,8 @@ public class Alarma implements Comparable<Alarma> {
 	private String codigoActivacionDesactivacion;
 	private String codigoConfiguracion;
 	private List<Usuario> usuariosValidos;
+	private List<Sensor> sensoresDeLaAlarma;
+
 
 	
 
@@ -17,6 +19,7 @@ public class Alarma implements Comparable<Alarma> {
 		this.id = id;
 		this.codigoActivacionDesactivacion = codigoActivacionDesactivacion;
 		this.codigoConfiguracion = codigoConfiguracion;
+		sensoresDeLaAlarma= new ArrayList<Sensor>();
 		usuariosValidos= new ArrayList<Usuario>();
 
 	}
@@ -27,6 +30,20 @@ public class Alarma implements Comparable<Alarma> {
 	}
 	public Boolean agregarUsuarioALaListaDeUsuariosValidos(Usuario usuarioBuscado) {
 		return usuariosValidos.add(usuarioBuscado);
+		
+	}
+	public Boolean agregarSensorALaListaDeSensores(Sensor sensor) {
+		return sensoresDeLaAlarma.add(sensor);
+		
+	}
+	
+	public Boolean sensorInexistente(Sensor sensor) {
+		for (Sensor s : sensoresDeLaAlarma) {
+			if (s.getIdentificadorNumerico()==sensor.getIdentificadorNumerico()) {
+				return false;
+			}
+		}
+		return true;
 		
 	}
 	@Override
@@ -52,6 +69,9 @@ public class Alarma implements Comparable<Alarma> {
 	}
 	public String getNombre() {
 		return nombre;
+	}
+	public List<Sensor> getSensoresDeLaAlarma() {
+		return sensoresDeLaAlarma;
 	}
 
 
