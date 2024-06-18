@@ -18,6 +18,7 @@ public class TestAlarmas {
 		Alarma alarma1= new Alarma();
 		assertNotNull(alarma1);
 		
+		
 	}
 
 }
