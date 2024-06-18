@@ -17,7 +17,7 @@ public class TestAlarmas {
 	public void queSePuedaRegistarUnaAlarmaEnLaCentral() {	
 		Alarma alarma1= new Alarma();
 		assertNotNull(alarma1);
-		
+		 
 		
 	}
 
