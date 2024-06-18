@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ar.unlam.edu.dominio.Alarma;
+import ar.unlam.edu.dominio.Central;
 
 public class TestAlarmas {
 
@@ -14,11 +15,12 @@ public class TestAlarmas {
 	}
 
 	@Test
-	public void queSePuedaRegistarUnaAlarmaEnLaCentral() {	
-		Alarma alarma1= new Alarma();
-		assertNotNull(alarma1);
-		 
-		
+	public void queSePuedaRegistarUnaAlarmaEnLaCentral() {
+		Central central = new Central();
+		Alarma alarma1 = new Alarma();
+		Boolean alarmaAgregada = central.agregarAlarma(alarma1);
+		assertTrue(alarmaAgregada);
+
 	}
 
 }
