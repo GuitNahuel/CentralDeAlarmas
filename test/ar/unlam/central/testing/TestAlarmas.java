@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import ar.unlam.edu.dominio.Alarma;
+
 public class TestAlarmas {
 
 	@Before
@@ -12,9 +14,9 @@ public class TestAlarmas {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
-//		asd
+	public void queSePuedaRegistarUnaAlarmaEnLaCentral() {	
+		Alarma alarma1= new Alarma();
+		assertNotNull(alarma1);
 		
 	}
 
