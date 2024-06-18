@@ -1,0 +1,5 @@
+package ar.unlam.edu.dominio;
+
+public class Central {
+
+}
