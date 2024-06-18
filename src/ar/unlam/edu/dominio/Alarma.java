@@ -2,9 +2,9 @@ package ar.unlam.edu.dominio;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 public class Alarma implements Comparable<Alarma> {
+	private String nombre;
 	private Integer id;
 	private String codigoActivacionDesactivacion;
 	private String codigoConfiguracion;
@@ -12,7 +12,8 @@ public class Alarma implements Comparable<Alarma> {
 
 	
 
-	public Alarma(Integer id, String codigoActivacionDesactivacion, String codigoConfiguracion) {
+	public Alarma(String nombre,Integer id, String codigoActivacionDesactivacion, String codigoConfiguracion) {
+		this.nombre=nombre;
 		this.id = id;
 		this.codigoActivacionDesactivacion = codigoActivacionDesactivacion;
 		this.codigoConfiguracion = codigoConfiguracion;
@@ -46,8 +47,11 @@ public class Alarma implements Comparable<Alarma> {
 		return codigoConfiguracion;
 	}
 
-	public TreeSet<Usuario> getUsuariosValidos() {
+	public List<Usuario> getUsuariosValidos() {
 		return usuariosValidos;
+	}
+	public String getNombre() {
+		return nombre;
 	}
 
 

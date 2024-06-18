@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
+import ar.unlam.central.testing.CodigoAlarmaIncorrectoException;
+
 public class Central {
 	private TreeSet<Alarma> alarmas;
 	private List<Usuario> usuarios;
 
 	public Central() {
 		alarmas = new TreeSet<Alarma>();
-		usuarios=new ArrayList<Usuario>();
+		usuarios = new ArrayList<Usuario>();
 	}
 
 	public Boolean agregarAlarma(Alarma alarma) {
@@ -31,17 +33,19 @@ public class Central {
 		return usuarios;
 	}
 
-	public Boolean agregarUsuarioValidoAUnaAlarma(String dniUsuarioAAgregar, Integer idAlarma, String codigoConfiguracionAlarma)
-			throws UsuarioException, AlarmaException {
+	public Boolean agregarUsuarioValidoAUnaAlarma(String dniUsuarioAAgregar, Integer idAlarma,
+			String codigoConfiguracionAlarma)
+			throws UsuarioException, AlarmaException, CodigoAlarmaIncorrectoException {
 		Usuario usuarioBuscado = busquedaDeUsuario(dniUsuarioAAgregar);
 		Alarma alarmaBuscada = busquedaDeAlarma(idAlarma);
 		if (usuarioBuscado != null && alarmaBuscada != null) {
-			if (alarmaBuscada.getId().equals(idAlarma)
-					&& alarmaBuscada.getCodigoConfiguracion().equals(codigoConfiguracionAlarma)) {
+			if (alarmaBuscada.getCodigoConfiguracion().equals(codigoConfiguracionAlarma)) {
 				return alarmaBuscada.agregarUsuarioALaListaDeUsuariosValidos(usuarioBuscado);
+			} else {
+				throw new CodigoAlarmaIncorrectoException("Codigo de configuracion de Alarma incorrecto");
 			}
-
 		}
+
 		return null;
 
 	}
